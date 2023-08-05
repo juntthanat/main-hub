@@ -8,7 +8,7 @@ export default function NavBar() {
   };
 
   return (
-    <div className="h-full w-full">
+    <div>
       <div
         onClick={handleClickHamburgerMenu}
         className="absolute h-[40px] w-[40px] z-20 bg-[#122030] rounded top-12 left-6 shadow-hamburger cursor-pointer"
