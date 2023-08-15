@@ -4,6 +4,9 @@ import { Poppins } from "next/font/google";
 import { useEffect, useState } from "react";
 import NavBar from "../../../../public/assets/navbar/navBar";
 import applicationPage from "../../../../public/assets/applicationPage/applicationPage";
+import applicationContent from "../../../../public/assets/applicationContent/applicationContent";
+import content from "../tictactoe/content"
+
 
 export default function Home() {
 
@@ -17,11 +20,7 @@ export default function Home() {
       <div className="h-full w-screen">
         {applicationPage("TICTACTOE")}
         {NavBar()}
-        <div className="absolute w-full h-full py-32 px-28">
-          <div className="w-full h-full bg-white rounded-lg bg-white overflow-auto p-8 text-black">
-            Hello
-          </div>
-        </div>
+        {applicationContent(content())}
       </div>
     </main>
   );
