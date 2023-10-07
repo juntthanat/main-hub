@@ -1,5 +1,6 @@
 "use client";
 import {useState, useEffect, KeyboardEvent} from "react";
+import Image from 'next/image';
 
 
 export default function TestCode() {
@@ -9,7 +10,7 @@ export default function TestCode() {
 
   const [mangaTitleList, setMangaTitleList] = useState();
   const [mangaCoverList, setMangaCoverList] = useState();
-  const [showMangaList, setShowMangeList] = useState();
+  const [showMangaList, setShowMangeList] = useState<JSX.Element>();
 
   const [addingHTML, setAddingHTML] = useState();
 
@@ -96,12 +97,12 @@ export default function TestCode() {
 
     setShowMangeList(
       <div>
-        <img alt="Manga Cover" className="cover" src={mangaCoverList[0]} />
-        <img alt="Manga Cover" className="cover" src={mangaCoverList[1]} />
-        <img alt="Manga Cover" className="cover" src={mangaCoverList[2]} />
-        <img alt="Manga Cover" className="cover" src={mangaCoverList[3]} />
-        <img alt="Manga Cover" className="cover" src={mangaCoverList[4]} />
-        <img alt="Manga Cover" className="cover" src={mangaCoverList[5]} />
+        <Image alt="Manga Cover" className="cover" src={mangaCoverList[0]} />
+        <Image alt="Manga Cover" className="cover" src={mangaCoverList[1]} />
+        <Image alt="Manga Cover" className="cover" src={mangaCoverList[2]} />
+        <Image alt="Manga Cover" className="cover" src={mangaCoverList[3]} />
+        <Image alt="Manga Cover" className="cover" src={mangaCoverList[4]} />
+        <Image alt="Manga Cover" className="cover" src={mangaCoverList[5]} />
       </div>
     );
   };
@@ -114,7 +115,7 @@ export default function TestCode() {
         onKeyDown={handleKeyDown}
       ></input>
       <div>
-        <img alt="Manga Cover" className="cover" src={coverImage} />
+        <Image alt="Manga Cover" className="cover" src={coverImage} />
         <div>{mangaTitle}</div>
         <div>
           {addingHTML}
@@ -123,7 +124,6 @@ export default function TestCode() {
       </div>
     </>
   );
-}
 }
 
 // MangaDex API Test Step
