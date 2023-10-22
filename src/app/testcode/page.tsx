@@ -1,7 +1,6 @@
 "use client";
-import {useState, useEffect, KeyboardEvent} from "react";
-import Image from 'next/image';
-
+import { useState, useEffect, KeyboardEvent } from "react";
+import Image from "next/image";
 
 export default function TestCode() {
   const [searchTitleInput, setSearchTitleInput] = useState(String);
@@ -23,13 +22,13 @@ export default function TestCode() {
   const baseUrl: String = "https://api.mangadex.org";
   const baseUrlCoverImage: String = "https://uploads.mangadex.org/covers"; //https://uploads.mangadex.org/covers/:manga-id/:cover-filename
 
-  useEffect(()=>{
+  useEffect(() => {
     if (searchTitleInput != undefined) {
       getMangaTitle();
       getMangaCoverImage();
       getMangaList();
     }
-  }, [searchTitleInput])
+  }, [searchTitleInput]);
 
   const getManga = async () => {
     return await fetch(
@@ -86,7 +85,8 @@ export default function TestCode() {
             (
               await getCoverImageFileName(
                 res.data[resIndex].relationships.find(
-                  (relationship: mangaRelationship) => relationship.type === "cover_art"
+                  (relationship: mangaRelationship) =>
+                    relationship.type === "cover_art"
                 ).id
               )
             ).data.attributes.fileName
@@ -97,12 +97,13 @@ export default function TestCode() {
 
     setShowMangeList(
       <div>
-        <Image alt="Manga Cover" className="cover" src={mangaCoverList[0]} />
-        <Image alt="Manga Cover" className="cover" src={mangaCoverList[1]} />
-        <Image alt="Manga Cover" className="cover" src={mangaCoverList[2]} />
-        <Image alt="Manga Cover" className="cover" src={mangaCoverList[3]} />
-        <Image alt="Manga Cover" className="cover" src={mangaCoverList[4]} />
-        <Image alt="Manga Cover" className="cover" src={mangaCoverList[5]} />
+        Image Cover Here
+        {/* <Image fill alt="Manga Cover" className="cover" src={mangaCoverList[0]} />
+        <Image fill alt="Manga Cover" className="cover" src={mangaCoverList[1]} />
+        <Image fill alt="Manga Cover" className="cover" src={mangaCoverList[2]} />
+        <Image fill alt="Manga Cover" className="cover" src={mangaCoverList[3]} />
+        <Image fill alt="Manga Cover" className="cover" src={mangaCoverList[4]} />
+        <Image fill alt="Manga Cover" className="cover" src={mangaCoverList[5]} /> */}
       </div>
     );
   };
@@ -113,9 +114,19 @@ export default function TestCode() {
         type="text"
         placeholder="Search Manga"
         onKeyDown={handleKeyDown}
+        className="text-black"
       ></input>
       <div>
-        <Image alt="Manga Cover" className="cover" src={coverImage} />
+        <div className="h-[10%] w-[10%]">
+          <Image
+            sizes="10vh"
+            width={0}
+            height={0}
+            alt="Manga Cover"
+            className="h-[100%] w-[100%]"
+            src={coverImage}
+          />
+        </div>
         <div>{mangaTitle}</div>
         <div>
           {addingHTML}
