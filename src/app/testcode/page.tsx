@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect, KeyboardEvent } from "react";
 import Image from "next/image";
+import { Interface } from "readline";
 
 export default function TestCode() {
   const [searchTitleInput, setSearchTitleInput] = useState(String);
@@ -8,7 +9,7 @@ export default function TestCode() {
   const [coverImage, setCoverImage] = useState(String);
 
   const [mangaTitleList, setMangaTitleList] = useState();
-  const [mangaCoverList, setMangaCoverList] = useState([]);
+  const [mangaCoverList, setMangaCoverList] = useState<string[]>([]);
   const [showMangaList, setShowMangeList] = useState<JSX.Element>();
 
   const [addingHTML, setAddingHTML] = useState();
@@ -73,25 +74,39 @@ export default function TestCode() {
 
   const getMangaList = async () => {
     const res = await getManga();
-    const mangaCoverList = [];
+    // const mangaCoverList = [];
     setMangaTitleList(res);
     console.log(res.data.length);
     for (let resIndex = 0; resIndex < res.data.length; resIndex++) {
-      mangaCoverList.push(
-        (
-          await getCoverImage(
-            res.data[resIndex].id,
-            (
-              await getCoverImageFileName(
-                res.data[resIndex].relationships.find(
-                  (relationship: mangaRelationship) =>
-                    relationship.type === "cover_art"
-                ).id
-              )
-            ).data.attributes.fileName
-          )
-        ).url
-      );
+      const newMangaCover = (
+        await getCoverImage(
+          res.data[resIndex].id,
+          (
+            await getCoverImageFileName(
+              res.data[resIndex].relationships.find(
+                (relationship: mangaRelationship) =>
+                  relationship.type === "cover_art"
+              ).id
+            )
+          ).data.attributes.fileName
+        )
+      ).url
+      setMangaCoverList(prevArray => [...prevArray, newMangaCover])
+      // mangaCoverList.push(
+      //   (
+      //     await getCoverImage(
+      //       res.data[resIndex].id,
+      //       (
+      //         await getCoverImageFileName(
+      //           res.data[resIndex].relationships.find(
+      //             (relationship: mangaRelationship) =>
+      //               relationship.type === "cover_art"
+      //           ).id
+      //         )
+      //       ).data.attributes.fileName
+      //     )
+      //   ).url
+      // );
     }
 
     // const createMangaList = (index:number) => {
@@ -105,7 +120,7 @@ export default function TestCode() {
     // }
 
     setShowMangeList(
-      <div>
+      <div className="flex">
         Image Cover Here
         <Image
           height={180}
@@ -114,12 +129,20 @@ export default function TestCode() {
           className="cover"
           src={mangaCoverList[0]}
         />
-        {/* <Image fill alt="Manga Cover" className="cover" src={mangaCoverList[0]} />
-        <Image fill alt="Manga Cover" className="cover" src={mangaCoverList[1]} />
-        <Image fill alt="Manga Cover" className="cover" src={mangaCoverList[2]} />
-        <Image fill alt="Manga Cover" className="cover" src={mangaCoverList[3]} />
-        <Image fill alt="Manga Cover" className="cover" src={mangaCoverList[4]} />
-        <Image fill alt="Manga Cover" className="cover" src={mangaCoverList[5]} /> */}
+        <Image
+          height={180}
+          width={180}
+          alt="Manga Cover"
+          className="cover"
+          src={mangaCoverList[1]}
+        />
+        <Image
+          height={180}
+          width={180}
+          alt="Manga Cover"
+          className="cover"
+          src={mangaCoverList[2]}
+        />
       </div>
     );
   };
