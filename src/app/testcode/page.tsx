@@ -8,7 +8,7 @@ export default function TestCode() {
   const [coverImage, setCoverImage] = useState(String);
 
   const [mangaTitleList, setMangaTitleList] = useState();
-  const [mangaCoverList, setMangaCoverList] = useState();
+  const [mangaCoverList, setMangaCoverList] = useState([]);
   const [showMangaList, setShowMangeList] = useState<JSX.Element>();
 
   const [addingHTML, setAddingHTML] = useState();
@@ -76,7 +76,6 @@ export default function TestCode() {
     const mangaCoverList = [];
     setMangaTitleList(res);
     console.log(res.data.length);
-    // for(let resIndex = 0; resIndex < res.data.length; resIndex++){
     for (let resIndex = 0; resIndex < res.data.length; resIndex++) {
       mangaCoverList.push(
         (
@@ -95,9 +94,26 @@ export default function TestCode() {
       );
     }
 
+    // const createMangaList = (index:number) => {
+    //   <Image
+    //       height={180}
+    //       width={180}
+    //       alt="Manga Cover"
+    //       className="cover"
+    //       src={mangaCoverList[index]}
+    //     />
+    // }
+
     setShowMangeList(
       <div>
         Image Cover Here
+        <Image
+          height={180}
+          width={180}
+          alt="Manga Cover"
+          className="cover"
+          src={mangaCoverList[0]}
+        />
         {/* <Image fill alt="Manga Cover" className="cover" src={mangaCoverList[0]} />
         <Image fill alt="Manga Cover" className="cover" src={mangaCoverList[1]} />
         <Image fill alt="Manga Cover" className="cover" src={mangaCoverList[2]} />
