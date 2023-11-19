@@ -10,7 +10,7 @@ export default function TestCode() {
 
   const [mangaTitleList, setMangaTitleList] = useState();
   const [mangaCoverList, setMangaCoverList] = useState<string[]>([]);
-  const [showMangaList, setShowMangeList] = useState<JSX.Element>();
+  const [showMangaList, setShowMangaList] = useState<JSX.Element[]>();
 
   const [addingHTML, setAddingHTML] = useState();
 
@@ -90,61 +90,57 @@ export default function TestCode() {
             )
           ).data.attributes.fileName
         )
-      ).url
-      setMangaCoverList(prevArray => [...prevArray, newMangaCover])
-      // mangaCoverList.push(
-      //   (
-      //     await getCoverImage(
-      //       res.data[resIndex].id,
-      //       (
-      //         await getCoverImageFileName(
-      //           res.data[resIndex].relationships.find(
-      //             (relationship: mangaRelationship) =>
-      //               relationship.type === "cover_art"
-      //           ).id
-      //         )
-      //       ).data.attributes.fileName
-      //     )
-      //   ).url
-      // );
+      ).url;
+      setMangaCoverList((prevArray) => [...prevArray, newMangaCover]);
     }
 
-    // const createMangaList = (index:number) => {
-    //   <Image
+    const createMangaList = (index: number) => {
+      let tempMangaList = [];
+      for (let mangaListIndex = 0; mangaListIndex < index; mangaListIndex++) {
+        tempMangaList.push(
+          <Image
+            height={180}
+            width={180}
+            alt="Manga Cover"
+            className="cover"
+            src={mangaCoverList[mangaListIndex]}
+          />
+        );
+      }
+      setShowMangaList(tempMangaList)
+      return tempMangaList;
+    };
+
+    console.log("Start of Create Manga List");
+    console.log(createMangaList(3));
+    console.log("End of Create Manga List");
+
+    // setShowMangaList(
+    //   <div className="flex">
+    //     Image Cover Here
+    //     <Image
     //       height={180}
     //       width={180}
     //       alt="Manga Cover"
     //       className="cover"
-    //       src={mangaCoverList[index]}
+    //       src={mangaCoverList[0]}
     //     />
-    // }
-
-    setShowMangeList(
-      <div className="flex">
-        Image Cover Here
-        <Image
-          height={180}
-          width={180}
-          alt="Manga Cover"
-          className="cover"
-          src={mangaCoverList[0]}
-        />
-        <Image
-          height={180}
-          width={180}
-          alt="Manga Cover"
-          className="cover"
-          src={mangaCoverList[1]}
-        />
-        <Image
-          height={180}
-          width={180}
-          alt="Manga Cover"
-          className="cover"
-          src={mangaCoverList[2]}
-        />
-      </div>
-    );
+    //     <Image
+    //       height={180}
+    //       width={180}
+    //       alt="Manga Cover"
+    //       className="cover"
+    //       src={mangaCoverList[1]}
+    //     />
+    //     <Image
+    //       height={180}
+    //       width={180}
+    //       alt="Manga Cover"
+    //       className="cover"
+    //       src={mangaCoverList[2]}
+    //     />
+    //   </div>
+    // );
   };
 
   return (
