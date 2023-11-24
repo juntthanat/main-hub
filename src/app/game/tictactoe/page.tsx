@@ -5,12 +5,9 @@ import { useEffect, useState } from "react";
 import NavBar from "../../../../public/assets/navbar/navBar";
 import applicationPage from "../../../../public/assets/applicationPage/applicationPage";
 import applicationContent from "../../../../public/assets/applicationContent/applicationContent";
-import content from "../tictactoe/content"
-
+import content from "../tictactoe/content";
 
 export default function Home() {
-
-
   return (
     <main className="flex flex-col h-screen font-sans">
       <link

@@ -67,12 +67,10 @@ export default function TictactoeContent() {
       <div className="h-4/5 w-full bg-blue-100">
         {ticTacToeTable}
         <table>
-          <tr>
-            {numberOfColumn}
-          </tr>
-          <tr>
-            {numberOfColumn}
-          </tr>
+          <tbody>
+            <tr>{numberOfColumn}</tr>
+            <tr>{numberOfColumn}</tr>
+          </tbody>
         </table>
       </div>
     </div>
