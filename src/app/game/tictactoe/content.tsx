@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 
 export default function TictactoeContent() {
   const [numberOfColumn, setNumberOfColumn] = useState<JSX.Element[]>();
-  const [numberOfRow, setNumberOfRow] = useState<number>(3);
+  const [numberOfRow, setNumberOfRow] = useState<JSX.Element[]>();
   const [numberOfWinCondition, setNumberOfWinCondition] = useState<number>(3);
   const [ticTacToeTable, setTicTacToeTable] = useState<JSX.Element[]>();
 
@@ -19,7 +19,15 @@ export default function TictactoeContent() {
     setNumberOfColumn(col);
   };
   const rowChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setNumberOfRow(Number(e.target.value));
+    let row = [];
+    for (
+      let rowIndex = 0;
+      rowIndex < Number(e.target.value);
+      rowIndex++
+    ) {
+      row.push(<tr>{numberOfColumn}</tr>)
+    }
+    setNumberOfRow(row);
   };
   const winConditionChangeHandler = (
     e: React.ChangeEvent<HTMLInputElement>
@@ -30,14 +38,14 @@ export default function TictactoeContent() {
     console.log("Reset Button Pressed");
   };
 
-  const createTicTacToeTable = () => {
-    let initialTable = [];
-    for (let rowIndex = 0; rowIndex < numberOfRow; rowIndex++) {
-      <tr></tr>;
-    }
-    initialTable.push(<div>hello world</div>);
-    setTicTacToeTable(initialTable);
-  };
+  // const createTicTacToeTable = () => {
+  //   let initialTable = [];
+  //   for (let rowIndex = 0; rowIndex < numberOfRow; rowIndex++) {
+  //     <tr></tr>;
+  //   }
+  //   initialTable.push(<div>hello world</div>);
+  //   setTicTacToeTable(initialTable);
+  // };
 
   return (
     <div className="h-full w-full">
@@ -45,18 +53,30 @@ export default function TictactoeContent() {
         <input
           type="number"
           placeholder="Column"
+          defaultValue={0}
+          min={0}
           onChange={columnChangeHandler}
         ></input>
         <input
           type="number"
           placeholder="Row"
+          defaultValue={0}
+          min={0}
           onChange={rowChangeHandler}
         ></input>
         <input
           type="number"
           placeholder="Win Condition"
+          defaultValue={3}
+          min={3}
           onChange={winConditionChangeHandler}
         ></input>
+        <div
+          className="h-2/5 w-1/6 bg-gray-300 hover:bg-gray-400 active:bg-gray-500 rounded border border-black flex justify-center items-center select-none"
+          onClick={resetButtonHandler}
+        >
+          Create
+        </div>
         <div
           className="h-2/5 w-1/6 bg-gray-300 hover:bg-gray-400 active:bg-gray-500 rounded border border-black flex justify-center items-center select-none"
           onClick={resetButtonHandler}
@@ -68,8 +88,9 @@ export default function TictactoeContent() {
         {ticTacToeTable}
         <table>
           <tbody>
-            <tr>{numberOfColumn}</tr>
-            <tr>{numberOfColumn}</tr>
+            {numberOfRow}
+            {/* <tr>{numberOfColumn}</tr>
+            <tr>{numberOfColumn}</tr> */}
           </tbody>
         </table>
       </div>
