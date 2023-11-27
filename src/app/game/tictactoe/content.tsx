@@ -14,7 +14,9 @@ export default function TictactoeContent() {
       rowIndex++
     ) {
       // console.log("row index "+rowIndex)
-      rowNum.push(<div key={rowIndex}>{rowIndex}</div>)
+      rowNum.push(<div key={rowIndex} className="bg-slate-300 h-10 w-10 border-black border">
+        
+      </div>)
     }
     for (
       let matrixIndex = 0;
@@ -41,8 +43,8 @@ export default function TictactoeContent() {
         <input
           type="number"
           placeholder="Matrix"
-          defaultValue={0}
-          min={0}
+          defaultValue={3}
+          min={3}
           onChange={matrixChangeHandler}
         ></input>
         <input
@@ -59,7 +61,7 @@ export default function TictactoeContent() {
           Reset
         </div>
       </div>
-      <div className="h-4/5 w-full bg-blue-100">
+      <div className="h-4/5 w-full bg-blue-100 flex justify-center items-center">
         <div>
             {ticTacToeTable}
         </div>
@@ -67,3 +69,52 @@ export default function TictactoeContent() {
     </div>
   );
 }
+
+
+// 0 1 2
+// 3 4 5
+// 6 7 8
+
+// Wining Condition
+
+// Horizontal
+// 0 1 2
+// 3 4 5
+// 6 7 8
+// Vertical
+// 0 3 6
+// 1 4 7
+// 2 5 8
+// Diagonal
+// 0 4 8
+// 2 4 6
+
+
+
+
+// 0 1 2
+// 3 4 5
+// 6 7 8
+
+// Mod Everything By 3 =
+// 0 1 2
+// 0 1 2
+// 0 1 2
+// Check (0 1 2)
+
+// 0  1  2  3
+// 4  5  6  7
+// 8  9  10 11
+// 12 13 14 15
+// Mod Everything By 4 =
+// 0 1 2 3
+// 0 1 2 3
+// 0 1 2 3
+// 0 1 2 3
+
+// 0 1 2 0
+// 1 2 0 1
+// 2 0 1 2
+// 0 1 2 0
+
+
