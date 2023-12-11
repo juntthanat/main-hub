@@ -1,33 +1,16 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
 import tableClickHandler from "../tictactoe/tableClickHandler";
+import ticTacToe from "../tictactoe/TicTacToe";
 
 export default function TictactoeContent() {
   const [numberOfWinCondition, setNumberOfWinCondition] = useState<number>(3);
-  const [ticTacToeTable, setTicTacToeTable] = useState<JSX.Element[]>();
+  const [ticTacToeMatrix, setTicTacToeMatrix] = useState<number>(3);
 
   const testing = useRef<HTMLInputElement>(null);
 
   const matrixChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    let matrixTable = [];
-    let rowNum = []
-    for(
-      let rowIndex = 0;
-      rowIndex < Number(e.target.value);
-      rowIndex++
-    ) {
-      rowNum.push(<div key={rowIndex} className="bg-slate-300 h-10 w-10 border-black border flex justify-center items-center" onClick={tableClickHandler}>
-        O
-      </div>)
-    }
-    for (
-      let matrixIndex = 0;
-      matrixIndex < Number(e.target.value);
-      matrixIndex++
-    ) {
-      matrixTable.push(<div className="flex" key={matrixIndex}>{rowNum}</div>);
-    }
-    setTicTacToeTable(matrixTable);
+    setTicTacToeMatrix(Number(e.target.value));
   };
   const winConditionChangeHandler = (
     e: React.ChangeEvent<HTMLInputElement>
@@ -35,8 +18,8 @@ export default function TictactoeContent() {
     setNumberOfWinCondition(Number(e.target.value));
   };
   const resetButtonHandler = () => {
-    if(testing.current!==null){
-      console.log(testing.current.value + " Ref Click")
+    if (testing.current !== null) {
+      console.log(testing.current.value + " Ref Click");
       testing.current.value = "5";
     }
     console.log("Reset Button Pressed");
@@ -50,6 +33,7 @@ export default function TictactoeContent() {
           placeholder="Matrix"
           defaultValue={3}
           min={3}
+          max={10}
           ref={testing}
           onChange={matrixChangeHandler}
         ></input>
@@ -58,6 +42,7 @@ export default function TictactoeContent() {
           placeholder="Win Condition"
           defaultValue={3}
           min={3}
+          max={10}
           onChange={winConditionChangeHandler}
         ></input>
         <div
@@ -68,15 +53,11 @@ export default function TictactoeContent() {
         </div>
       </div>
       <div className="h-4/5 w-full bg-blue-100 flex justify-center items-center">
-        <div>
-            {ticTacToeTable}
-        </div>
+        <div>{ticTacToe(ticTacToeMatrix)}</div>
       </div>
     </div>
   );
 }
-
-
 
 // function setTicTacToeTable(matrixTable: import("react").JSX.Element[]) {
 //   throw new Error("Function not implemented.");
@@ -98,9 +79,6 @@ export default function TictactoeContent() {
 // Diagonal
 // 0 4 8
 // 2 4 6
-
-
-
 
 // 0 1 2
 // 3 4 5
@@ -136,7 +114,7 @@ export default function TictactoeContent() {
 //     rowIndex++
 //   ) {
 //     rowNum.push(<div key={rowIndex} className="bg-slate-300 h-10 w-10 border-black border">
-      
+
 //     </div>)
 //   }
 //   for (
