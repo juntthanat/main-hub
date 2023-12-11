@@ -1,10 +1,12 @@
 "use client";
-import { useState, useEffect, Dispatch, SetStateAction } from "react";
+import { useState, useEffect, useRef } from "react";
 import tableClickHandler from "../tictactoe/tableClickHandler";
 
 export default function TictactoeContent() {
   const [numberOfWinCondition, setNumberOfWinCondition] = useState<number>(3);
   const [ticTacToeTable, setTicTacToeTable] = useState<JSX.Element[]>();
+
+  const testing = useRef<HTMLInputElement>(null);
 
   const matrixChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     let matrixTable = [];
@@ -33,6 +35,10 @@ export default function TictactoeContent() {
     setNumberOfWinCondition(Number(e.target.value));
   };
   const resetButtonHandler = () => {
+    if(testing.current!==null){
+      console.log(testing.current.value + " Ref Click")
+      testing.current.value = "5";
+    }
     console.log("Reset Button Pressed");
   };
 
@@ -44,6 +50,7 @@ export default function TictactoeContent() {
           placeholder="Matrix"
           defaultValue={3}
           min={3}
+          ref={testing}
           onChange={matrixChangeHandler}
         ></input>
         <input
