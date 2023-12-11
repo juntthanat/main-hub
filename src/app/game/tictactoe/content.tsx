@@ -16,6 +16,7 @@ export default function TictactoeContent() {
     setNumberOfWinCondition(Number(e.target.value));
   };
   const resetButtonHandler = () => {
+    setTicTacToeMatrix(0);
     console.log("Reset Button Pressed");
   };
 
