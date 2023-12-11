@@ -1,5 +1,6 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, Dispatch, SetStateAction } from "react";
+import tableClickHandler from "../tictactoe/tableClickHandler";
 
 export default function TictactoeContent() {
   const [numberOfWinCondition, setNumberOfWinCondition] = useState<number>(3);
@@ -13,9 +14,8 @@ export default function TictactoeContent() {
       rowIndex < Number(e.target.value);
       rowIndex++
     ) {
-      // console.log("row index "+rowIndex)
-      rowNum.push(<div key={rowIndex} className="bg-slate-300 h-10 w-10 border-black border">
-        
+      rowNum.push(<div key={rowIndex} className="bg-slate-300 h-10 w-10 border-black border flex justify-center items-center" onClick={tableClickHandler}>
+        O
       </div>)
     }
     for (
@@ -23,7 +23,6 @@ export default function TictactoeContent() {
       matrixIndex < Number(e.target.value);
       matrixIndex++
     ) {
-      // console.log("matrix index "+matrixIndex)
       matrixTable.push(<div className="flex" key={matrixIndex}>{rowNum}</div>);
     }
     setTicTacToeTable(matrixTable);
@@ -71,6 +70,10 @@ export default function TictactoeContent() {
 }
 
 
+
+// function setTicTacToeTable(matrixTable: import("react").JSX.Element[]) {
+//   throw new Error("Function not implemented.");
+// }
 // 0 1 2
 // 3 4 5
 // 6 7 8
@@ -117,4 +120,24 @@ export default function TictactoeContent() {
 // 2 0 1 2
 // 0 1 2 0
 
-
+// const matrixChangeHandler = (setState: Dispatch<SetStateAction<JSX.Element[] | undefined>>) => (e: React.ChangeEvent<HTMLInputElement>) => {
+//   let matrixTable = [];
+//   let rowNum = []
+//   for(
+//     let rowIndex = 0;
+//     rowIndex < Number(e.target.value);
+//     rowIndex++
+//   ) {
+//     rowNum.push(<div key={rowIndex} className="bg-slate-300 h-10 w-10 border-black border">
+      
+//     </div>)
+//   }
+//   for (
+//     let matrixIndex = 0;
+//     matrixIndex < Number(e.target.value);
+//     matrixIndex++
+//   ) {
+//     matrixTable.push(<div className="flex" key={matrixIndex}>{rowNum}</div>);
+//   }
+//   setTicTacToeTable(matrixTable);
+// };
