@@ -11,6 +11,7 @@ export default function TicTacToe(TICTACTOE_SIZE:number) {
     if (TICTACTOE_SIZE !== ticTacToeState.length){
         setTicTacToeState(initTicTacToeState(TICTACTOE_SIZE))
     }
+    
 
     return (
         <div>

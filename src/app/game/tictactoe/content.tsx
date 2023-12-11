@@ -7,8 +7,6 @@ export default function TictactoeContent() {
   const [numberOfWinCondition, setNumberOfWinCondition] = useState<number>(3);
   const [ticTacToeMatrix, setTicTacToeMatrix] = useState<number>(3);
 
-  const testing = useRef<HTMLInputElement>(null);
-
   const matrixChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTicTacToeMatrix(Number(e.target.value));
   };
@@ -18,10 +16,6 @@ export default function TictactoeContent() {
     setNumberOfWinCondition(Number(e.target.value));
   };
   const resetButtonHandler = () => {
-    if (testing.current !== null) {
-      console.log(testing.current.value + " Ref Click");
-      testing.current.value = "5";
-    }
     console.log("Reset Button Pressed");
   };
 
@@ -34,7 +28,6 @@ export default function TictactoeContent() {
           defaultValue={3}
           min={3}
           max={10}
-          ref={testing}
           onChange={matrixChangeHandler}
         ></input>
         <input
