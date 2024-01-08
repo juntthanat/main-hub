@@ -1,4 +1,5 @@
 import { useState } from "react";
+import CheckTicTacToe from "./checkTicTacToe";
 
 const initTicTacToeState = (TICTACTOE_SIZE: number) =>
   Array.from({ length: TICTACTOE_SIZE }, () =>
@@ -13,22 +14,24 @@ export default function TicTacToe(TICTACTOE_SIZE: number) {
 
   if (TICTACTOE_SIZE !== ticTacToeState.length) {
     setTicTacToeState(initTicTacToeState(TICTACTOE_SIZE));
+    setPlayer("player1");
   }
 
   const ticTacToeOnClickHandler = (row: number, col: number) => {
     setTicTacToeState((prev) => {
       const previousTicTacToeState = [...prev];
-      console.log(previousTicTacToeState)
-
+      
       if (previousTicTacToeState[row][col] === 0) {
-        if (player === "player1") {
-          previousTicTacToeState[row][col] = 1;
+          if (player === "player1") {
+              previousTicTacToeState[row][col] = 1;
           setPlayer("player2");
         } else if (player === "player2") {
-          previousTicTacToeState[row][col] = 2;
-          setPlayer("player1");
+            previousTicTacToeState[row][col] = 2;
+            setPlayer("player1");
         }
-      }
+    }
+    
+    CheckTicTacToe(previousTicTacToeState, TICTACTOE_SIZE)
       return previousTicTacToeState;
     });
   };
