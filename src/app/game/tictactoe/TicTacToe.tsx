@@ -26,12 +26,12 @@ export default function TicTacToe(TICTACTOE_SIZE: number) {
               previousTicTacToeState[row][col] = 1;
           setPlayer("player2");
         } else if (player === "player2") {
-            previousTicTacToeState[row][col] = 2;
-            setPlayer("player1");
+            previousTicTacToeState[row][col] = -1;
+          setPlayer("player1");
         }
     }
     
-    CheckTicTacToe(previousTicTacToeState, TICTACTOE_SIZE)
+    CheckTicTacToe(previousTicTacToeState, TICTACTOE_SIZE, row, col, player)
       return previousTicTacToeState;
     });
   };
@@ -50,7 +50,7 @@ export default function TicTacToe(TICTACTOE_SIZE: number) {
                     ticTacToeOnClickHandler(rowIndex, colIndex);
                   }}
                 >
-                  {col === 1 ? "O" : col === 2 ? "X" : ""}
+                  {col === 1 ? "O" : col === -1 ? "X" : ""}
                 </div>
               );
             })}

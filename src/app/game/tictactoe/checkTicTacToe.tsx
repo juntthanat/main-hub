@@ -1,8 +1,15 @@
+import CheckDiagonal from "./checkDiagonal"
+import CheckHorizontal from "./checkHorizontal"
+import CheckVerticle from "./checkVerticle"
 import CheckX from "./checkX"
 import CheckY from "./checkY"
 
 
-export default function CheckTicTacToe(ticTacToeState:number[][], TICTACTOE_SIZE: number){
+export default function CheckTicTacToe(ticTacToeState:number[][], TICTACTOE_SIZE: number, row:number, col:number, player:string){
+
+    CheckHorizontal(ticTacToeState, TICTACTOE_SIZE, row, player)
+    CheckVerticle(ticTacToeState, TICTACTOE_SIZE, col, player)
+    CheckDiagonal(ticTacToeState, TICTACTOE_SIZE, row, col, player)
     
     // console.log(ticTacToeState)
 }
