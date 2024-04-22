@@ -1,0 +1,77 @@
+import { useRef, useState } from "react";
+import "./styles.css";
+
+const TICTACTOE_SIZE = 10;
+const initTicTacToeState = () =>
+  Array.from({ length: TICTACTOE_SIZE }, () =>
+    Array.from({ length: TICTACTOE_SIZE }, () => 0)
+  );
+
+export default function App() {
+  return (
+    <div className="App">
+      <TicTacToe />
+    </div>
+  );
+}
+
+export const TicTacToe = () => {
+  const [ticTacToeState, setTicTacToeState] = useState(initTicTacToeState());
+  const [player, setPlayer] = useState<"A" | "B">("A");
+
+  const ticTacToeOnClickHandler = (row: number, col: number) => {
+    setTicTacToeState((prev) => {
+      const temp = [...prev];
+
+      if (temp[row][col] === 0) {
+        if (player === "A") {
+          temp[row][col] = 1;
+          setPlayer("B");
+        } else if (player === "B") {
+          temp[row][col] = 2;
+          setPlayer("A");
+        }
+      }
+
+      return temp;
+    });
+  };
+
+  return (
+    <div>
+      {ticTacToeState.map((row, rowIndex) => {
+        return (
+          <div style={{ display: "flex" }}>
+            {row.map((col, colIndex) => {
+              return (
+                <div
+                  onClick={() => {
+                    ticTacToeOnClickHandler(rowIndex, colIndex);
+                  }}
+                  style={{
+                    width: "30px",
+                    height: "30px",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    border: "1px solid",
+                    cursor: "pointer",
+                  }}
+                >
+                  {col === 1 ? "o" : col === 2 ? "x" : ""}
+                </div>
+              );
+            })}
+          </div>
+        );
+      })}
+      <button
+        onClick={() => {
+          setTicTacToeState(initTicTacToeState());
+        }}
+      >
+        reset
+      </button>
+    </div>
+  );
+};
